@@ -35,7 +35,7 @@ function createTemplate(data) {
     var title = data.tile;
     var heading = data.heading;
     var date = data.date;
-    car content = data.content;
+    var content = data.content;
     var htmlTemplate =`
     <html>
         <head>
