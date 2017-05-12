@@ -6,7 +6,7 @@ var app = express();
 app.use(morgan('combined'));
 
 var articleOne = {
-    title: 'Article One|Chetan Garg',
+    title: 'Article One | Chetan Garg' ,
     heading: 'Article One',
     date: '12th May, 2017',
     content:`                
@@ -30,6 +30,62 @@ var articleOne = {
                 </p> 
             `
 };
+
+var articleTwo = {
+    title: 'Article Two |Chetan Garg;',
+    heading: 'Article Two' ,
+    date: '12th May, 2017',
+    content:`                
+                <p>
+                    Life is something we all share
+                    Just like oxygen in the air 
+                    The way we live it is up to us 
+                    With a negative or with a plus
+                </p>
+                <p>
+                   Life is something, we should cherish, 
+                    We never know, when we will perish. 
+                    Live each and every single day, 
+                    Smell the flowers, stop and play. 
+                </p>
+                <p>
+                    Life is something, we have been blessed, 
+                    Choice is yours, choose your quest. 
+                    Follow your passions, and you will be fine, 
+                    With the right attitude, you will shine.
+                </p> 
+            `
+};
+
+var articleThree = {
+    title: 'Article Three | Chetan Garg' ,
+    heading: 'Article Three' ,
+    date: '12th May, 2017',
+    content:`                
+                <p>
+                    Life is something we all share
+                    Just like oxygen in the air 
+                    The way we live it is up to us 
+                    With a negative or with a plus
+                </p>
+                <p>
+                   Life is something, we should cherish, 
+                    We never know, when we will perish. 
+                    Live each and every single day, 
+                    Smell the flowers, stop and play. 
+                </p>
+                <p>
+                    Life is something, we have been blessed, 
+                    Choice is yours, choose your quest. 
+                    Follow your passions, and you will be fine, 
+                    With the right attitude, you will shine.
+                </p> 
+            `
+};
+
+
+
+
 
 function createTemplate(data) {
     var title = data.tile;
@@ -78,11 +134,11 @@ app.get('/article-one', function (req,res){
 });
 
 app.get('/article-two', function (req,res){
-    res.sendFile(path.join(__dirname, 'ui', 'article-two.html'));
+    res.send(createTemplate(articleTwo));
 });
 
 app.get('/article-three', function (req,res){
-    res.sendFile(path.join(__dirname, 'ui', 'article-three.html'));
+    res.send(createTemplate(articleThree));
 });
 
 app.get('/ui/style.css', function (req, res) {
