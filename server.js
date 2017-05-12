@@ -5,12 +5,76 @@ var path = require('path');
 var app = express();
 app.use(morgan('combined'));
 
+var articleOne = {
+    title: 'Article One|Chetan Garg',
+    heading: 'Article One',
+    date: '12th May, 2017',
+    content:`                
+                <p>
+                    Life is something we all share
+                    Just like oxygen in the air 
+                    The way we live it is up to us 
+                    With a negative or with a plus
+                </p>
+                <p>
+                   Life is something, we should cherish, 
+                    We never know, when we will perish. 
+                    Live each and every single day, 
+                    Smell the flowers, stop and play. 
+                </p>
+                <p>
+                    Life is something, we have been blessed, 
+                    Choice is yours, choose your quest. 
+                    Follow your passions, and you will be fine, 
+                    With the right attitude, you will shine.
+                </p> 
+            `
+};
+
+function createTemplate(data) {
+    var title = data.tile;
+    var heading = data.heading;
+    var date = data.date;
+    car content = data.content;
+    var htmlTemplate =`
+    <html>
+        <head>
+            <title>
+                ${title}
+            </title>
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <link href="/ui/style.css" rel="stylesheet" />
+        </head>
+        <body>
+            <div class="container">
+                <div>
+                    <a href="/">Home</a>
+                    <hr/>
+                </div>
+                <div>
+                    <h3>
+                       ${heading}
+                    </h3>
+                </div>
+                <div>
+                    ${date}
+                </div>
+                <div>
+                    ${content}
+                </div>
+            </div>
+        </body>
+    </html>
+    `
+    ;
+    return htmlTemplate;
+}
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
 
 app.get('/article-one', function (req,res){
-    res.sendFile(path.join(__dirname, 'ui', 'article-one.html'));
+    res.send(createTemplate(articleOne));
 });
 
 app.get('/article-two', function (req,res){
