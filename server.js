@@ -5,85 +5,85 @@ var path = require('path');
 var app = express();
 app.use(morgan('combined'));
 
-var articleOne = {
-    title: 'Article One | Chetan Garg' ,
-    heading: 'Article One',
-    date: '12th May, 2017',
-    content:`                
-                <p>
-                    Life is something we all share
-                    Just like oxygen in the air 
-                    The way we live it is up to us 
-                    With a negative or with a plus
-                </p>
-                <p>
-                   Life is something, we should cherish, 
-                    We never know, when we will perish. 
-                    Live each and every single day, 
-                    Smell the flowers, stop and play. 
-                </p>
-                <p>
-                    Life is something, we have been blessed, 
-                    Choice is yours, choose your quest. 
-                    Follow your passions, and you will be fine, 
-                    With the right attitude, you will shine.
-                </p> 
-            `
+var articles = {
+    'article-one' : {
+        title: 'Article One | Chetan Garg' ,
+        heading: 'Article One',
+        date: '12th May, 2017',
+        content:`                
+                    <p>
+                        Life is something we all share
+                        Just like oxygen in the air 
+                        The way we live it is up to us 
+                        With a negative or with a plus
+                    </p>
+                    <p>
+                       Life is something, we should cherish, 
+                        We never know, when we will perish. 
+                        Live each and every single day, 
+                        Smell the flowers, stop and play. 
+                    </p>
+                    <p>
+                        Life is something, we have been blessed, 
+                        Choice is yours, choose your quest. 
+                        Follow your passions, and you will be fine, 
+                        With the right attitude, you will shine.
+                    </p> 
+                `
+    },
+    
+    'article-two' :{
+        title: 'Article Two |Chetan Garg;',
+        heading: 'Article Two' ,
+        date: '12th May, 2017',
+        content:`                
+                    <p>
+                        Life is something we all share
+                        Just like oxygen in the air 
+                        The way we live it is up to us 
+                        With a negative or with a plus
+                    </p>
+                    <p>
+                       Life is something, we should cherish, 
+                        We never know, when we will perish. 
+                        Live each and every single day, 
+                        Smell the flowers, stop and play. 
+                    </p>
+                    <p>
+                        Life is something, we have been blessed, 
+                        Choice is yours, choose your quest. 
+                        Follow your passions, and you will be fine, 
+                        With the right attitude, you will shine.
+                    </p> 
+                `
+    },
+    
+    'article-three' : {
+        title: 'Article Three | Chetan Garg' ,
+        heading: 'Article Three' ,
+        date: '12th May, 2017',
+        content:`                
+                    <p>
+                        Life is something we all share
+                        Just like oxygen in the air 
+                        The way we live it is up to us 
+                        With a negative or with a plus
+                    </p>
+                    <p>
+                       Life is something, we should cherish, 
+                        We never know, when we will perish. 
+                        Live each and every single day, 
+                        Smell the flowers, stop and play. 
+                    </p>
+                    <p>
+                        Life is something, we have been blessed, 
+                        Choice is yours, choose your quest. 
+                        Follow your passions, and you will be fine, 
+                        With the right attitude, you will shine.
+                    </p> 
+              `
+    },
 };
-
-var articleTwo = {
-    title: 'Article Two |Chetan Garg;',
-    heading: 'Article Two' ,
-    date: '12th May, 2017',
-    content:`                
-                <p>
-                    Life is something we all share
-                    Just like oxygen in the air 
-                    The way we live it is up to us 
-                    With a negative or with a plus
-                </p>
-                <p>
-                   Life is something, we should cherish, 
-                    We never know, when we will perish. 
-                    Live each and every single day, 
-                    Smell the flowers, stop and play. 
-                </p>
-                <p>
-                    Life is something, we have been blessed, 
-                    Choice is yours, choose your quest. 
-                    Follow your passions, and you will be fine, 
-                    With the right attitude, you will shine.
-                </p> 
-            `
-};
-
-var articleThree = {
-    title: 'Article Three | Chetan Garg' ,
-    heading: 'Article Three' ,
-    date: '12th May, 2017',
-    content:`                
-                <p>
-                    Life is something we all share
-                    Just like oxygen in the air 
-                    The way we live it is up to us 
-                    With a negative or with a plus
-                </p>
-                <p>
-                   Life is something, we should cherish, 
-                    We never know, when we will perish. 
-                    Live each and every single day, 
-                    Smell the flowers, stop and play. 
-                </p>
-                <p>
-                    Life is something, we have been blessed, 
-                    Choice is yours, choose your quest. 
-                    Follow your passions, and you will be fine, 
-                    With the right attitude, you will shine.
-                </p> 
-            `
-};
-
-
 
 
 
@@ -129,16 +129,11 @@ app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
 
-app.get('/article-one', function (req,res){
-    res.send(createTemplate(articleOne));
-});
-
-app.get('/article-two', function (req,res){
-    res.send(createTemplate(articleTwo));
-});
-
-app.get('/article-three', function (req,res){
-    res.send(createTemplate(articleThree));
+app.get('/:articleName', function (req,res){
+    //articleName ==article-one
+    //articles[articleName] = {} contents for article one
+    var articleName = req.parans.articleName;
+    res.send(createTemplate(articles[articleName]));
 });
 
 app.get('/ui/style.css', function (req, res) {
@@ -148,7 +143,6 @@ app.get('/ui/style.css', function (req, res) {
 app.get('/ui/madi.png', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'madi.png'));
 });
-
 
 var port = 8080; // Use 8080 for local development because you might already have apache running on 80
 app.listen(8080, function () {
